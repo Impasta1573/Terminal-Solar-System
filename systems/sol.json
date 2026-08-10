@@ -1,0 +1,73 @@
+{
+  "name": "Solar System",
+  "description": "Template system demonstrating planets, moons, eccentric and inclined orbits.",
+  "bodies": {
+    "Sun": {
+      "symbol": "*",
+      "parent": null,
+      "orbit": {"type":"fixed","a":0,"e":0,"period":1,"inclination":0,"node":0,"argPeriapsis":0,"meanAnomaly":0},
+      "physical": {"Type":"Star","Mass":"1.989e30 kg","Radius":"696,340 km","Temp":"5,772 K"},
+      "description":"The star at the center of the Solar System."
+    },
+    "Mercury": {
+      "symbol":"☿","parent":"Sun",
+      "orbit":{"type":"elliptic","a":0.387099,"e":0.205636,"period":87.969,"inclination":7.005,"node":48.331,"argPeriapsis":77.456,"meanAnomaly":0},
+      "physical":{"Type":"Planet","Mass":"3.3011e23 kg","Radius":"2,439.7 km","Gravity":"3.70 m/s2"},
+      "description":"The closest planet to the Sun."
+    },
+    "Venus": {
+      "symbol":"♀","parent":"Sun",
+      "orbit":{"type":"elliptic","a":0.723336,"e":0.006772,"period":224.701,"inclination":3.3947,"node":76.680,"argPeriapsis":1131.532,"meanAnomaly":0},
+      "physical":{"Type":"Planet","Mass":"4.8675e24 kg","Radius":"6,051.8 km","Gravity":"8.87 m/s2"},
+      "description":"It's year takes longer than it's day."
+    },
+    "Earth": {
+      "symbol":"⊕","parent":"Sun",
+      "orbit":{"type":"elliptic","a":1,"e":0.016711,"period":365.256,"inclination":0.00005,"node":-11.2606,"argPeriapsis":102.937,"meanAnomaly":0},
+      "physical":{"Type":"Planet","Mass":"5.972e24 kg","Radius":"6,371 km","Gravity":"9.81 m/s2"},
+      "description":"The third planet from the Sun and the home world of humanity."
+    },
+    "Moon": {
+      "symbol":"M","parent":"Earth",
+      "orbit":{"type":"elliptic","a":0.00257,"e":0.055,"period":27.321661,"inclination":5.145,"node":125.08,"argPeriapsis":318.15,"meanAnomaly":0},
+      "physical":{"Type":"Moon","Mass":"7.342e22 kg","Radius":"1,737.4 km","Gravity":"1.62 m/s2"},
+      "description":"Earth's only moon."
+    },
+    "Mars": {
+      "symbol":"♂","parent":"Sun",
+      "orbit":{"type":"elliptic","a":1.523679,"e":0.0934,"period":686.98,"inclination":1.85,"node":49.56,"argPeriapsis":286.5,"meanAnomaly":0},
+      "physical":{"Type":"Planet","Mass":"6.417e23 kg","Radius":"3,389.5 km","Gravity":"3.71 m/s2"},
+      "description":"The fourth planet from the Sun."
+    },
+    "Jupiter": {
+      "symbol":"♃","parent":"Sun",
+      "orbit":{"type":"elliptic","a":5.202887,"e":0.048386,"period":4332.589,"inclination":1.3044,"node":100.454,"argPeriapsis":14.728,"meanAnomaly":0},
+      "physical":{"Type":"Planet","Mass":"1.8982e27 kg","Radius":"69,911 km","Gravity":"24.79 m/s2"},
+      "description":"The largest planet in our Solar System."
+    },
+    "Saturn": {
+      "symbol":"♄","parent":"Sun",
+      "orbit":{"type":"elliptic","a":9.56676,"e":0.053862,"period":10759.22,"inclination":2.4852,"node":113.662,"argPeriapsis":92.598,"meanAnomaly":0},
+      "physical":{"Type":"Planet","Mass":"5.6834e26 kg","Radius":"58,232 km","Gravity":"10.44 m/s2"},
+      "description":"A gas giant with rings."
+    },
+    "Uranus": {
+      "symbol":"♅","parent":"Sun",
+      "orbit":{"type":"elliptic","a":19.189165,"e":0.047257,"period":30688.5,"inclination":0.7733,"node":74.017,"argPeriapsis":170.954,"meanAnomaly":0},
+      "physical":{"Type":"Planet","Mass":"8.6810e25 kg","Radius":"25,362 km","Gravity":"8.69 m/s2"},
+      "description":"Weirdly tipped on it's side."
+    },
+    "Neptune": {
+      "symbol":"♆","parent":"Sun",
+      "orbit":{"type":"elliptic","a":30.069923,"e":0.008590,"period":60182,"inclination":1.7700,"node":131.784,"argPeriapsis":44.964,"meanAnomaly":259.9},
+      "physical":{"Type":"Planet","Mass":"1.0241e26 kg","Radius":"24,622 km","Gravity":"11.15 m/s2"},
+      "description":"It's not as blue as you think it is."
+    },
+    "Pluto": {
+      "symbol":"♇","parent":"Sun",
+      "orbit":{"type":"elliptic","a":39.482,"e":0.2488,"period":90560,"inclination":17.66,"node":110.30,"argPeriapsis":224.07,"meanAnomaly":14.5},
+      "physical":{"Type":"Planet","Mass":"1.303e22 kg","Radius":"1,188 km","Gravity":"0.62 m/s2"},
+      "description":"IAU you can go to Hell."
+    }
+  }
+}
