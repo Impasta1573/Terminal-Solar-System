@@ -1,0 +1,533 @@
+HOW TO CREATE YOUR OWN SOLAR SYSTEM
+===================================
+
+1. Create a new JSON file
+-------------------------
+
+Go to the "systems" folder and create a new file ending in .json.
+
+Example:
+
+    systems/my_system.json
+
+The program automatically finds every .json file in this folder.
+
+"sol.json" is loaded first if it exists. All other systems are loaded alphabetically.
+
+
+2. Basic system structure
+-------------------------
+
+A system JSON file should look like this:
+
+{
+    "name": "My System",
+    "description": "A short description of this system.",
+    "bodies": {
+        ...
+    }
+}
+
+
+3. Adding a body
+----------------
+
+Each object goes inside "bodies".
+
+Example:
+
+"Sun": {
+    "symbol": "O",
+    "parent": null,
+
+    "orbit": {
+        "type": "fixed",
+        "a": 0,
+        "e": 0,
+        "period": 1,
+        "inclination": 0,
+        "node": 0,
+        "argPeriapsis": 0,
+        "meanAnomaly": 0
+    },
+
+    "physical": {
+        "type": "Star",
+        "mass": "1.989e30 kg",
+        "radius": "696,340 km",
+        "temperature": "5772 K"
+    },
+
+    "description": "The star at the center of the system."
+}
+
+
+4. Body symbols
+---------------
+
+"symbol" is the single ASCII character used to display the body.
+
+Example:
+
+"symbol": "E"
+
+Only use ONE character.
+
+Do not use emoji or multi-character symbols.
+
+
+5. Parents and children
+-----------------------
+
+The "parent" field determines what the body orbits.
+
+A central object should have:
+
+"parent": null
+
+A planet orbiting the star:
+
+"parent": "Sun"
+
+A moon orbiting Earth:
+
+"parent": "Earth"
+
+A submoon orbiting the Moon:
+
+"parent": "Moon"
+
+The parent's name must exactly match the name of another body in
+the same JSON file.
+
+Example:
+
+"Earth": {
+    "symbol": "E",
+    "parent": "Sun",
+    ...
+},
+
+"Moon": {
+    "symbol": "m",
+    "parent": "Earth",
+    ...
+}
+
+
+6. Orbital data
+---------------
+
+Each orbit has:
+
+"type"
+"a"
+"e"
+"period"
+"inclination"
+"node"
+"argPeriapsis"
+"meanAnomaly"
+
+
+"type" can be:
+
+"elliptic"
+"hyperbolic"
+
+A central fixed object can use:
+
+"type": "fixed"
+
+
+7. Elliptical orbits
+--------------------
+
+For a normal closed orbit:
+
+"type": "elliptic"
+
+"a" = semi-major axis
+"e" = eccentricity
+"period" = orbital period in days
+
+For example:
+
+"orbit": {
+    "type": "elliptic",
+    "a": 1,
+    "e": 0.0167,
+    "period": 365.256,
+    "inclination": 0,
+    "node": 0,
+    "argPeriapsis": 0,
+    "meanAnomaly": 0
+}
+
+
+8. Hyperbolic orbits
+--------------------
+
+Hyperbolic trajectories are useful for spacecraft, comets,
+interstellar objects, and other objects that are not permanently
+bound to their parent.
+
+Use:
+
+"type": "hyperbolic"
+
+For a hyperbolic trajectory:
+
+e must be greater than 1
+a must be negative
+
+Example:
+
+"orbit": {
+    "type": "hyperbolic",
+    "a": -5,
+    "e": 1.4,
+    "period": 500,
+    "inclination": 10,
+    "node": 40,
+    "argPeriapsis": 90,
+    "meanAnomaly": 0
+}
+
+For hyperbolic objects, "period" is used as the simulation's
+time scale for the trajectory rather than representing a true
+orbital period.
+
+
+9. Orbital inclination
+----------------------
+
+"inclination" controls how much the orbit is tilted.
+
+The value is in degrees.
+
+Example:
+
+"inclination": 5.14
+
+
+10. Longitude of ascending node
+-------------------------------
+
+"node" controls the orientation of the orbital plane.
+
+It is measured in degrees.
+
+Example:
+
+"node": 125.08
+
+
+11. Argument of periapsis
+-------------------------
+
+"argPeriapsis" controls the orientation of the orbit's closest
+approach to its parent.
+
+It is measured in degrees.
+
+Example:
+
+"argPeriapsis": 318.15
+
+
+12. Mean anomaly
+----------------
+
+"meanAnomaly" determines where the object starts in its orbit.
+
+It is measured in degrees.
+
+Changing this value changes the starting position without changing
+the orbit itself.
+
+Example:
+
+"meanAnomaly": 180
+
+
+13. Physical data
+----------------
+
+The "physical" section can contain any information you want to
+display in the data table.
+
+For example:
+
+"physical": {
+    "type": "Terrestrial planet",
+    "mass": "5.972e24 kg",
+    "radius": "6,371 km",
+    "gravity": "9.81 m/s2"
+}
+
+You can add additional fields:
+
+"physical": {
+    "type": "Gas giant",
+    "mass": "1.898e27 kg",
+    "radius": "69,911 km",
+    "gravity": "24.79 m/s2",
+    "temperature": "110 K",
+    "moons": "95"
+}
+
+The program does not require specific physical fields except that
+the "physical" section should be an object if you want physical
+data displayed.
+
+
+14. Description
+---------------
+
+"description" is optional.
+
+Example:
+
+"description": "A small rocky planet with a highly eccentric orbit."
+
+It is displayed when the data table is enabled with T.
+
+
+15. Moons
+---------
+
+Moons are created simply by giving them a planet as their parent.
+
+Example:
+
+"Moon": {
+    "symbol": "m",
+    "parent": "Earth",
+
+    "orbit": {
+        "type": "elliptic",
+        "a": 0.00257,
+        "e": 0.055,
+        "period": 27.321661,
+        "inclination": 5.145,
+        "node": 125.08,
+        "argPeriapsis": 318.15,
+        "meanAnomaly": 0
+    },
+
+    "physical": {},
+
+    "description": ""
+}
+
+
+16. Submoons
+------------
+
+Submoons work the same way.
+
+For example:
+
+"Submoon": {
+    "symbol": "s",
+    "parent": "Moon",
+
+    "orbit": {
+        "type": "elliptic",
+        "a": 0.0001,
+        "e": 0.01,
+        "period": 5,
+        "inclination": 2,
+        "node": 0,
+        "argPeriapsis": 0,
+        "meanAnomaly": 0
+    },
+
+    "physical": {},
+
+    "description": ""
+}
+
+The program can therefore build parent -> moon -> submoon
+hierarchies directly from the JSON.
+
+
+17. Complete small example
+--------------------------
+
+{
+    "name": "Example System",
+    "description": "A simple custom system.",
+
+    "bodies": {
+
+        "Star": {
+            "symbol": "O",
+            "parent": null,
+
+            "orbit": {
+                "type": "fixed",
+                "a": 0,
+                "e": 0,
+                "period": 1,
+                "inclination": 0,
+                "node": 0,
+                "argPeriapsis": 0,
+                "meanAnomaly": 0
+            },
+
+            "physical": {
+                "type": "Star",
+                "mass": "1e30 kg"
+            },
+
+            "description": "The central star."
+        },
+
+        "Planet": {
+            "symbol": "P",
+            "parent": "Star",
+
+            "orbit": {
+                "type": "elliptic",
+                "a": 1,
+                "e": 0.05,
+                "period": 365,
+                "inclination": 3,
+                "node": 20,
+                "argPeriapsis": 50,
+                "meanAnomaly": 0
+            },
+
+            "physical": {
+                "type": "Planet",
+                "mass": "5e24 kg",
+                "radius": "6,000 km"
+            },
+
+            "description": "A custom planet."
+        },
+
+        "Moon": {
+            "symbol": "m",
+            "parent": "Planet",
+
+            "orbit": {
+                "type": "elliptic",
+                "a": 0.0025,
+                "e": 0.05,
+                "period": 28,
+                "inclination": 5,
+                "node": 30,
+                "argPeriapsis": 60,
+                "meanAnomaly": 180
+            },
+
+            "physical": {
+                "type": "Moon"
+            },
+
+            "description": "A moon orbiting the planet."
+        }
+    }
+}
+
+
+18. Important rules
+-------------------
+
+- Every body must have a unique name.
+- Every symbol should be exactly one ASCII character.
+- A body's parent must exist.
+- Central bodies use "parent": null.
+- Elliptical orbits require e < 1.
+- Elliptical orbits require a > 0.
+- Hyperbolic orbits require e > 1.
+- Hyperbolic orbits require a < 0.
+- Do not use e = 1; parabolic trajectories are not supported.
+- "period" must be greater than 0 for orbiting objects.
+- Angles are entered in degrees.
+- Distances use the same unit system as the parent hierarchy.
+- Do not add rings; ring rendering is not supported.
+- Keep all JSON syntax valid, including commas and quotation marks.
+
+
+19. Adding the system
+---------------------
+
+Place your JSON file in:
+
+    systems/
+
+For example:
+
+    systems/sol.json
+    systems/alpha_centauri.json
+    systems/binary.json
+    systems/interstellar.json
+
+Restart the program after adding or changing a system.
+
+
+20. Switching systems
+---------------------
+
+While the program is running:
+
+    S
+
+moves to the next available JSON system.
+
+Systems are sorted alphabetically, except "sol.json" is always
+placed first if it exists.
+
+
+21. Focusing objects
+-------------------
+
+Press:
+
+    F
+
+to cycle through every body defined in the currently loaded JSON.
+
+The focus list is generated from the JSON automatically.
+
+The program does not require planet names to be added to the
+JavaScript source.
+
+
+22. Data table
+--------------
+
+Press:
+
+    T
+
+to show or hide the focused object's data table.
+
+The table uses the orbital data, physical data, and description
+stored in that body's JSON entry.
+
+
+23. Recommended workflow
+------------------------
+
+1. Copy sol.json.
+2. Rename the copy.
+3. Change the system name.
+4. Remove or add bodies.
+5. Set each body's parent.
+6. Enter orbital values.
+7. Add physical information.
+8. Add descriptions.
+9. Save the JSON file in the systems folder.
+10. Restart the program.
+11. Press S to find the new system.
+12. Use F to test each body's focus and children.
+
+
+That's it. The JavaScript should not need to be edited when creating
+a new solar system. The JSON file is intended to contain all of the
+system's body and orbital data.
