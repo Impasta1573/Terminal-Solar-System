@@ -1,0 +1,1 @@
+Do you really need instructions? Just put the systems folder in the same place as solarsystem.js, then in your terminal type "node [PATH]/solarsystem.js", and that’s it.
